@@ -39,9 +39,18 @@ class Util:
         return out
 
     @classmethod
+    def uuid(cls):
+        u = getattr(cls, "_uuid", None)
+        if u is None:
+            import uuid
+
+            cls._uuid = uuid
+            return uuid
+        return u
+
+    @classmethod
     def create_uuid(cls):
-        cls.NM()
-        return str(cls._uuid.uuid4())
+        return str(cls.uuid().uuid4())
 
     @classmethod
     def NM(cls):
@@ -60,9 +69,6 @@ class Util:
             cls._Gio = Gio
             cls._GObject = GObject
             n = NM
-            import uuid
-
-            cls._uuid = uuid
         return n
 
     @classmethod
